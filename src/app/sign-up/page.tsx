@@ -3,11 +3,23 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
-import { signUp, useSession } from "../lib/auth-client";
+import { signIn, signUp, useSession } from "../lib/auth-client";
 import { toast } from "react-toastify";
+import { SiAlwaysdata } from "react-icons/si";
 
 const SignUp = () => {
 const { data: session, isPending } = useSession();
+
+const login = async () => {
+  const { error } = await signIn.social({
+    provider: "google",
+    callbackURL: "/",
+  });
+
+  if (error) {
+    toast.error(error.message || "Google login failed!");
+  }
+};
 
 const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
 e.preventDefault();
@@ -27,6 +39,7 @@ password: data.password,
 callbackURL: "/",
 });
 
+
 if (error) {
 toast.error(error.message || "Account creation failed!");
 return;
@@ -36,6 +49,7 @@ toast.success(`${data.name}, you have successfully created an account!`);
 
 console.log(resdata);
 };
+
 
 
   return (
@@ -104,6 +118,7 @@ console.log(resdata);
 
           {/* Google Sign Up */}
           <button
+          onClick={login}
             type="button"
             className="btn btn-outline w-full gap-3"
           >
