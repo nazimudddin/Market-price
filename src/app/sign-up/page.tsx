@@ -20,6 +20,16 @@ const login = async () => {
     toast.error(error.message || "Google login failed!");
   }
 };
+    const logingithub = async () => {
+      const { error } = await signIn.social({
+        provider: "github",
+        callbackURL: "/",
+      });
+    
+      if (error) {
+        toast.error(error.message || "Google login failed!");
+      }
+    };
 
 const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
 e.preventDefault();
@@ -128,6 +138,7 @@ console.log(resdata);
 
           {/* GitHub Sign Up */}
           <button
+          onClick={logingithub}
             type="button"
             className="btn btn-neutral w-full gap-3"
           >

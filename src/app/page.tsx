@@ -7,7 +7,7 @@ import Allproducts from "./components/Allproducts";
 export default function Home() {
   return (
   <div className="bg-background/70">
-    <Marquee></Marquee>
+
     <HomePage></HomePage>
     <Mainsection></Mainsection>
     <Allproducts></Allproducts>

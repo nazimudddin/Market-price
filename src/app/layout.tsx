@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import { ToastContainer } from "react-toastify";
+import Marquee from "react-fast-marquee";
+import MarqueeSection from "./components/Marquee";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +29,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="lignt"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen flex flex-col">
       <Navbar></Navbar>
+      <MarqueeSection></MarqueeSection>
+      <main className="flex-1"> 
         {children}
+      </main>
+        
         <Footer></Footer>
         <ToastContainer />
         </body>
