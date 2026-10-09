@@ -43,7 +43,7 @@ const MarqueeSection = async () => {
         {data.map((item) => (
           <Link
             key={item.id}
-            href={`/product/${item.slug}`}
+            href={`/detailspage/${item.slug}`}
             className="flex items-center gap-2 whitespace-nowrap mr-10"
           >
             <span className="text-xl">{item.categoryIcon}</span>
