@@ -1,129 +1,139 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { signIn, useSession } from "../lib/auth-client";
-import { toast } from "react-toastify";
+"use client"
+import Link from 'next/link';
+import React from 'react';
+import { FaGithub } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import { signIn, useSession } from '../lib/auth-client';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
-  const login = async () => {
-    const { error } = await signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
+    const login = async () => {
+      const { error } = await signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    
+      if (error) {
+        toast.error(error.message || "Google login failed!");
+      }
+    };
+    
 
-    if (error) {
-      toast.error(error.message || "Google login failed!");
-    }
-  };
-  const handleSignin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+ const handleSignin = async (e: React.FormEvent<HTMLFormElement>) => {
+e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+const formData = new FormData(e.currentTarget);
 
-    const data: Record<string, string> = {};
+const data: Record<string, string> = {};
 
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
+formData.forEach((value, key) => {
+data[key] = value.toString();
+});
 
-    const { data: resdata, error } = await signIn.email({
-      email: data.email,
-      password: data.password,
-      callbackURL: "/",
-    });
+const { data: resdata, error } = await signIn.email({
+email: data.email,
+password: data.password,
+callbackURL: "/",
+});
 
-    if (error) {
-      toast.error(error.message || "Sign in failed!");
-      return;
-    }
+if (error) {
+toast.error(error.message || "Sign in failed!");
+return;
+}
 
-    toast.success("You have successfully logged in!");
+toast.success("You have successfully logged in!");
 
-    console.log(resdata);
-  };
+console.log(resdata);
+};
 
-  return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10">
-        <div className="card w-full max-w-md bg-base-100 shadow-2xl border border-base-300">
-          <div className="card-body p-8">
-            {/* Heading */}
-            <div className="text-center mb-6">
-              <h1 className="text-3xl font-bold text-primary">Sign In</h1>
-              <p className="text-base-content/60 mt-2">
-                Sign In to get started with BazarDor
-              </p>
-            </div>
+    return (
+        <div>
+             <div className="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl border border-base-300">
+        <div className="card-body p-8">
 
-            {/* Signup Form */}
-            <form className="space-y-4" onSubmit={handleSignin}>
-              <div>
-                <label className="label">
-                  <span className="label-text font-medium">Email Address</span>
-                </label>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text font-medium">Password</span>
-                </label>
-                <input
-                  name="password"
-                  type="password"
-                  placeholder="Create a password"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              <button type="submit" className="btn btn-primary w-full mt-2">
-                Sign In
-              </button>
-            </form>
-
-            {/* Divider */}
-            <div className="divider text-base-content/50">OR</div>
-
-            {/* Google Sign Up */}
-            <button
-              onClick={login}
-              type="button"
-              className="btn btn-outline w-full gap-3"
-            >
-              <FcGoogle className="text-xl" />
-              Sign In with Google
-            </button>
-
-            {/* GitHub Sign Up */}
-            <button type="button" className="btn btn-neutral w-full gap-3">
-              <FaGithub className="text-xl" />
-              Sign In with GitHub
-            </button>
-
-            {/* Sign In Link */}
-            <p className="text-center text-sm mt-5">
-              Already have an account?{" "}
-              <Link
-                href="/sign-up"
-                className="text-primary font-semibold hover:underline"
-              >
-                Sign Up
-              </Link>
+          {/* Heading */}
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-primary">
+              Sign In
+            </h1>
+            <p className="text-base-content/60 mt-2">
+              Sign In to get started with BazarDor
             </p>
           </div>
+
+          {/* Signup Form */}
+          <form className="space-y-4" onSubmit={handleSignin} >
+
+            <div>
+              <label className="label">
+                <span className="label-text font-medium">Email Address</span>
+              </label>
+              <input
+              name="email"
+                type="email"
+                placeholder="Enter your email"
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="label">
+                <span className="label-text font-medium">Password</span>
+              </label>
+              <input
+              name="password"
+                type="password"
+                placeholder="Create a password"
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn btn-primary w-full mt-2">
+              Sign In
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="divider text-base-content/50">OR</div>
+
+          {/* Google Sign Up */}
+          <button
+          onClick={login}
+            type="button"
+            className="btn btn-outline w-full gap-3"
+          >
+            <FcGoogle className="text-xl" />
+            Sign In with Google
+          </button>
+
+          {/* GitHub Sign Up */}
+          <button
+            type="button"
+            className="btn btn-neutral w-full gap-3"
+          >
+            <FaGithub className="text-xl" />
+            Sign In with GitHub
+          </button>
+
+          {/* Sign In Link */}
+          <p className="text-center text-sm mt-5">
+            Already have an account?{" "}
+            <Link
+              href="/sign-up"
+              className="text-primary font-semibold hover:underline"
+            >
+              Sign Up
+            </Link>
+          </p>
+
         </div>
       </div>
     </div>
-  );
+        </div>
+    );
 };
 
 export default SignIn;
