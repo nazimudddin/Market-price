@@ -6,7 +6,7 @@ import Link from "next/link";
 import { signIn, signUp, useSession } from "../lib/auth-client";
 import { toast } from "react-toastify";
 import { SiAlwaysdata } from "react-icons/si";
-
+// 
 const SignUp = () => {
 const { data: session, isPending } = useSession();
 
