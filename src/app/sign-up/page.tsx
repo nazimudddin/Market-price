@@ -27,7 +27,7 @@ const login = async () => {
       });
     
       if (error) {
-        toast.error(error.message || "Google login failed!");
+        toast.error(error.message || "github login failed!");
       }
     };
 
