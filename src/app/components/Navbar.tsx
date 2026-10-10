@@ -35,7 +35,7 @@ export default function Navbar() {
     async function getCategories() {
       try {
         const response = await fetch(
-          "https://api.api-store.workers.dev/api/bazardor/categories"
+          "https://openapi.programming-hero.com/api/bazardor/categories"
         );
 
         if (!response.ok) {
@@ -51,6 +51,7 @@ export default function Navbar() {
 
     getCategories();
   }, []);
+  console.log(navcategory);
 
   // Bangla date and time
   useEffect(() => {
