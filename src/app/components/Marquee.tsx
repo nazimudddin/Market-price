@@ -37,6 +37,7 @@ const MarqueeSection = async () => {
 
   const data: Product[] = await res.json();
 
+
   return (
     <div className="bg-white border-y py-2">
       <FastMarquee speed={70} pauseOnHover>
