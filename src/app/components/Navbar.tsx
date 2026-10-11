@@ -1,16 +1,9 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { TiShoppingCart } from "react-icons/ti";
-import {
-  FiUser,
-  FiLogOut,
-  FiChevronDown,
-  FiMenu,
-  FiX,
-} from "react-icons/fi";
+import { FiUser, FiLogOut, FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { useSession, signOut } from "@/app/lib/auth-client";
 
@@ -35,7 +28,7 @@ export default function Navbar() {
     async function getCategories() {
       try {
         const response = await fetch(
-          "https://openapi.programming-hero.com/api/bazardor/categories"
+          "https://api.api-store.workers.dev/api/bazardor/categories",
         );
 
         if (!response.ok) {
@@ -60,7 +53,7 @@ export default function Navbar() {
         new Intl.DateTimeFormat("bn-BD", {
           dateStyle: "full",
           timeStyle: "short",
-        }).format(new Date())
+        }).format(new Date()),
       );
     }
 
@@ -88,7 +81,7 @@ export default function Navbar() {
   }
 
   // Category navigation
-  const categoryLinks = navcategory.map((category,i) => (
+  const categoryLinks = navcategory.map((category, i) => (
     <li key={i}>
       <Link
         href={`/category/${category.slug}`}
@@ -147,13 +140,9 @@ export default function Navbar() {
       {isDropdownOpen && (
         <div className="absolute right-0 top-full z-50 mt-2 w-64 rounded-xl border border-separator bg-background p-3 shadow-xl">
           <div className="border-b border-separator px-2 pb-3">
-            <p className="break-words font-semibold">
-              {user?.name || "User"}
-            </p>
+            <p className="break-words font-semibold">{user?.name || "User"}</p>
 
-            <p className="break-all text-sm text-default-500">
-              {user?.email}
-            </p>
+            <p className="break-all text-sm text-default-500">{user?.email}</p>
           </div>
 
           <Link
@@ -185,13 +174,9 @@ export default function Navbar() {
         <FaUserCircle className="shrink-0 text-3xl" />
 
         <div className="min-w-0">
-          <p className="truncate font-semibold">
-            {user?.name || "User"}
-          </p>
+          <p className="truncate font-semibold">{user?.name || "User"}</p>
 
-          <p className="break-all text-sm text-default-500">
-            {user?.email}
-          </p>
+          <p className="break-all text-sm text-default-500">{user?.email}</p>
         </div>
       </div>
 
@@ -216,8 +201,8 @@ export default function Navbar() {
   );
 
   return (
-    <div>
-      <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/90 py-2 backdrop-blur-lg">
+    <div className="sticky top-0 z-50">
+      <nav className="sticky top-0 z-50 w-full border-b border-separator bg-background/90 py-2 backdrop-blur-lg">
         {/* Header */}
         <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           {/* Logo */}
@@ -250,9 +235,7 @@ export default function Navbar() {
                   বাজার দর
                 </span>
 
-                <span className="block text-xs sm:text-sm">
-                  {date}
-                </span>
+                <span className="block text-xs sm:text-sm">{date}</span>
               </span>
             </Link>
           </div>
@@ -281,9 +264,7 @@ export default function Navbar() {
               {categoryLinks}
 
               {isPending ? (
-                <li className="list-none py-2 text-sm">
-                  Loading...
-                </li>
+                <li className="list-none py-2 text-sm">Loading...</li>
               ) : user ? (
                 mobileUserMenu
               ) : (
@@ -298,4 +279,3 @@ export default function Navbar() {
     </div>
   );
 }
-

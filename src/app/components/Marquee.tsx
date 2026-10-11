@@ -31,9 +31,9 @@ const MarqueeSection = async () => {
     }
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
+  // if (!res.ok) {
+  //   throw new Error("Failed to fetch products");
+  // }
 
   const data: Product[] = await res.json();
 
